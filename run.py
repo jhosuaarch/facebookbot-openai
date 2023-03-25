@@ -46,7 +46,6 @@ async def main():
                         # Response
                         response_ai = await response(data.body)
                         await fb.send_message(data.to,data.data,response_ai)
-                        print(len(fb.users))
                 
                     fb.users.clear()
 
