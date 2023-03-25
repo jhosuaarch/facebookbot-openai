@@ -4,15 +4,6 @@ import requests
 from bs4 import BeautifulSoup as parser
 
 
-class User(object):
-    def __init__(self, *data, **kwargs):
-        for i in data:
-            for dictionary in i:
-                for key in dictionary:
-                    setattr(self, key, dictionary[key])
-            for key in kwargs:
-                setattr(self, key, kwargs[key])
-
 class Facebook:
 
     def __init__(self):
@@ -84,7 +75,7 @@ class Facebook:
                     "csid":d[12]['value']
                 }})
         
-            return User(self.users)
+            return self.users
         
         return None
 
