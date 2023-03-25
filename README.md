@@ -41,6 +41,6 @@ python3 run.py
 ```
 
 Silahkan masukkan Cookie Facebook kalian, untuk mendapatkan cookie facebook silahkan lihat youtube.
-Jika berhasil login kalian akan di hadapkan dengan menu Start dan Logout
+<br/>Jika berhasil login kalian akan di hadapkan dengan menu Start dan Logout
 - Start untuk memulai bot
-- Logout untuk logout / mengganti aku
+- Logout untuk logout / mengganti akun
