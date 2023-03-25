@@ -1,7 +1,7 @@
-import os,time, asyncio
-from lib import Facebook
-from lib import response
-from colorama import Fore,Back,Style
+import os
+import asyncio
+from colorama import Fore, Back, Style
+from lib import Facebook, response, Attr
 from concurrent.futures import ThreadPoolExecutor
 
 
@@ -36,20 +36,26 @@ async def main():
             try:
                 msg = await fb.get_message()
                 if msg != None:
-                    print(f"[{Fore.GREEN}{msg.name}{Fore.RESET}] : {msg.body}")
-                    t+=1
-                    print(f"=> Total Pesan : ({Fore.LIGHTYELLOW_EX}{t}{Fore.RESET})",end="\r")
-                    
-                    # Response
-                    response_ai = await response(msg.body)
-                    await fb.send_message(msg.to,msg.data,response_ai)
-            
+                    for i in msg:
+                        data = Attr(i)
+                        print(f"[{Fore.GREEN}{data.name}{Fore.RESET}] : {data.body}")
+                        
+                        t+=1
+                        print(f"=> Total Pesan : ({Fore.LIGHTYELLOW_EX}{t}{Fore.RESET})",end="\r")
+                        
+                        # Response
+                        response_ai = await response(data.body)
+                        await fb.send_message(data.to,data.data,response_ai)
+                        print(len(fb.users))
+                
+                    fb.users.clear()
+
             except Exception as e:
                 print(f"[{Fore.RED}ERROR{Fore.RESET}] {e}")
         
     else:
         print(f"[{Fore.RED}!{Fore.RESET}] Login Gagal :(")
-        os.remove('.cookie.log')
+        os.remove('.cookie.log');exit()
 
 
 if __name__ == "__main__":
